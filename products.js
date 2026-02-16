@@ -2,6 +2,7 @@ const API_BASE = 'https://fakestoreapi.com';
 
 let allProducts = [];
 let currentCategory = 'all';
+let cart = [];
 
 const categoryContainer = document.getElementById('categoryContainer');
 const productsGrid = document.getElementById('productsGrid');
@@ -9,7 +10,61 @@ const loadingSpinner = document.getElementById('loadingSpinner');
 const productModal = document.getElementById('productModal');
 const modalContent = document.getElementById('modalContent');
 
+// ==================== Active Link Detection ====================
+function setActiveNavLink() {
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  const navLinks = document.querySelectorAll('.nav-link');
+  
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    const href = link.getAttribute('href').split('/').pop() || 'index.html';
+    
+    if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+      link.classList.add('active');
+    }
+  });
+}
+
+// Add scroll effect for navbar
+window.addEventListener('scroll', function() {
+  const navbar = document.querySelector('nav');
+  if (window.scrollY > 10) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
+});
+
+// ==================== Cart Functions ====================
+// Initialize cart from localStorage
+function initCart() {
+  const savedCart = localStorage.getItem('swiftcart');
+  if (savedCart) {
+    cart = JSON.parse(savedCart);
+  }
+  updateCartBadge();
+}
+
+// Update cart badge count
+function updateCartBadge() {
+  const cartBadge = document.getElementById('cartBadge');
+  if (cartBadge) {
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    cartBadge.textContent = totalItems;
+  }
+}
+
+// Add item to cart and update badge
+function saveCart() {
+  localStorage.setItem('swiftcart', JSON.stringify(cart));
+  updateCartBadge();
+}
+
+// ==================== End Cart Functions ====================
+
 document.addEventListener('DOMContentLoaded', () => {
+  setActiveNavLink();
+  initCart();
   loadCategories();
   loadProducts();
 });
@@ -229,6 +284,24 @@ function addToCart(productId) {
 
   if (product) {
     console.log('Added to cart:', product);
+
+    // Add to cart array
+    const existingItem = cart.find(item => item.id === product.id);
+    
+    if (existingItem) {
+      existingItem.quantity += 1;
+    } else {
+      cart.push({
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        image: product.image,
+        quantity: 1
+      });
+    }
+    
+    // Save and update badge
+    saveCart();
 
     // Close modal if open
     if (productModal.open) {

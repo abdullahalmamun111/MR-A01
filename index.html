@@ -25,6 +25,51 @@
       padding: 0;
     }
 
+    /* Sticky Navbar */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    nav.scrolled {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      padding: 0.5rem 0;
+    }
+
+    /* Active Link Styling */
+    .nav-link {
+      position: relative;
+      padding: 0.5rem 0;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #4f46e5;
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-link.active {
+      color: #4f46e5;
+    }
+
+    .nav-link.active::after {
+      width: 100%;
+    }
+
     .mobile-menu {
       max-height: 0;
       overflow: hidden;
@@ -32,7 +77,58 @@
     }
 
     .mobile-menu.active {
-      max-height: 300px;
+      max-height: 500px;
+    }
+
+    .mobile-menu .nav-link {
+      display: block;
+      padding: 0.75rem 1rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .mobile-menu .nav-link:hover {
+      background-color: rgba(79, 70, 229, 0.1);
+    }
+
+    .mobile-menu .nav-link.active {
+      background-color: rgba(79, 70, 229, 0.2);
+      color: #4f46e5;
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: #ef4444;
+      color: white;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: bold;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+      }
+      50% {
+        box-shadow: 0 0 0 5px rgba(239, 68, 68, 0.1);
+      }
+    }
+
+    .cart-icon-wrapper {
+      position: relative;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .cart-icon-wrapper:hover {
+      transform: scale(1.1);
     }
   </style>
 </head>
@@ -51,24 +147,27 @@
         </div>
 
         <div class="hidden lg:flex items-center gap-8">
-          <a href="#" class="hover:text-indigo-400 transition">Home</a>
-          <a href="products.html" class="hover:text-indigo-400 transition">Products</a>
-          <a href="#" class="hover:text-indigo-400 transition">About</a>
-          <a href="#" class="hover:text-indigo-400 transition">Contact</a>
+          <a href="index.html" class="nav-link active hover:text-indigo-400 transition">Home</a>
+          <a href="products.html" class="nav-link hover:text-indigo-400 transition">Products</a>
+          <a href="#" class="nav-link hover:text-indigo-400 transition">About</a>
+          <a href="#" class="nav-link hover:text-indigo-400 transition">Contact</a>
         </div>
 
         <div class="flex items-center gap-4">
-          <i class="fas fa-shopping-cart cursor-pointer hover:text-indigo-400 transition"></i>
+          <div class="cart-icon-wrapper cursor-pointer hover:text-indigo-400 transition">
+            <i class="fas fa-shopping-cart text-xl"></i>
+            <div class="cart-badge" id="cartBadge">0</div>
+          </div>
         </div>
       </div>
 
       <!-- Mobile Menu -->
       <div id="mobileMenu" class="mobile-menu lg:hidden bg-gray-800 rounded-lg mb-2">
         <div class="flex flex-col py-3">
-          <a href="/" class="px-4 py-3 hover:bg-gray-700 transition">Home</a>
-          <a href="products.html" class="hover:text-indigo-400 transition">Products</a>
-          <a href="#" class="px-4 py-3 hover:bg-gray-700 transition">About</a>
-          <a href="#" class="px-4 py-3 hover:bg-gray-700 transition">Contact</a>
+          <a href="index.html" class="nav-link active px-4 py-3 hover:bg-gray-700 transition">Home</a>
+          <a href="products.html" class="nav-link px-4 py-3 hover:bg-gray-700 transition">Products</a>
+          <a href="#" class="nav-link px-4 py-3 hover:bg-gray-700 transition">About</a>
+          <a href="#" class="nav-link px-4 py-3 hover:bg-gray-700 transition">Contact</a>
         </div>
       </div>
     </div>
@@ -82,8 +181,8 @@
         <h1 class="text-4xl lg:text-5xl font-bold mb-4">Best Collection For You</h1>
         <p class="text-base lg:text-lg mb-6 text-gray-200">Discover the latest trends in fashion, electronics, and more.
           Shop with confidence and style at SwiftCart.</p>
-        <button class="bg-indigo-600 hover:bg-indigo-700 px-8 py-3 rounded font-medium text-white transition">Shop
-          Now</button>
+        <a href="products.html" class="bg-indigo-600 hover:bg-indigo-700 px-8 py-3 rounded font-medium text-white transition inline-block">Shop
+          Now</a>
       </div>
     </div>
   </section>
@@ -159,7 +258,7 @@
                 class="flex-1 border border-gray-300 py-2 rounded hover:bg-gray-50 text-sm font-medium transition">
                 <i class="fas fa-eye mr-1"></i> Details
               </button>
-              <button
+              <button onclick="addToCartFromHome(1, 'Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops', 109.95, 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400')"
                 class="flex-1 bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 text-sm font-medium transition">
                 <i class="fas fa-shopping-cart mr-1"></i> Add
               </button>
@@ -186,7 +285,7 @@
                 class="flex-1 border border-gray-300 py-2 rounded hover:bg-gray-50 text-sm font-medium transition">
                 <i class="fas fa-eye mr-1"></i> Details
               </button>
-              <button
+              <button onclick="addToCartFromHome(2, 'Mens Casual Premium Slim Fit T-Shirts', 22.3, 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400')"
                 class="flex-1 bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 text-sm font-medium transition">
                 <i class="fas fa-shopping-cart mr-1"></i> Add
               </button>
@@ -213,7 +312,7 @@
                 class="flex-1 border border-gray-300 py-2 rounded hover:bg-gray-50 text-sm font-medium transition">
                 <i class="fas fa-eye mr-1"></i> Details
               </button>
-              <button
+              <button onclick="addToCartFromHome(3, 'Mens Cotton Jacket', 55.99, 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400')"
                 class="flex-1 bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 text-sm font-medium transition">
                 <i class="fas fa-shopping-cart mr-1"></i> Add
               </button>
@@ -241,8 +340,8 @@
         <div>
           <h4 class="text-white font-semibold mb-4">QUICK LINKS</h4>
           <ul class="space-y-2 text-sm">
-            <li><a href="#" class="hover:text-white transition">Home</a></li>
-            <li><a href="#" class="hover:text-white transition">Products</a></li>
+            <li><a href="index.html" class="hover:text-white transition">Home</a></li>
+            <li><a href="products.html" class="hover:text-white transition">Products</a></li>
             <li><a href="#" class="hover:text-white transition">About</a></li>
             <li><a href="#" class="hover:text-white transition">Contact</a></li>
           </ul>
@@ -287,8 +386,109 @@
     </div>
   </footer>
 
-  <!-- JavaScript for Mobile Menu Toggle -->
+  <!-- JavaScript for Mobile Menu Toggle & Cart Management -->
   <script>
+    // ==================== Cart Management ====================
+    let cart = [];
+
+    // ==================== Active Link Detection ====================
+    function setActiveNavLink() {
+      const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+      const navLinks = document.querySelectorAll('.nav-link');
+      
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        const href = link.getAttribute('href').split('/').pop() || 'index.html';
+        
+        if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+          link.classList.add('active');
+        }
+      });
+    }
+
+    // Add scroll effect for navbar
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('nav');
+      if (window.scrollY > 10) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // ==================== Cart Management ====================
+
+    // Initialize cart from localStorage
+    function initCart() {
+      const savedCart = localStorage.getItem('swiftcart');
+      if (savedCart) {
+        cart = JSON.parse(savedCart);
+      }
+      updateCartBadge();
+    }
+
+    // Update cart badge count
+    function updateCartBadge() {
+      const cartBadge = document.getElementById('cartBadge');
+      if (cartBadge) {
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        cartBadge.textContent = totalItems;
+      }
+    }
+
+    // Save cart to localStorage
+    function saveCart() {
+      localStorage.setItem('swiftcart', JSON.stringify(cart));
+      updateCartBadge();
+    }
+
+    // Add to cart from homepage
+    function addToCartFromHome(id, title, price, image) {
+      const existingItem = cart.find(item => item.id === id);
+
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        cart.push({
+          id: id,
+          title: title,
+          price: price,
+          image: image,
+          quantity: 1
+        });
+      }
+
+      saveCart();
+      showNotification('Product added to cart!', 'success');
+    }
+
+    // Show notification
+    function showNotification(message, type = 'success') {
+      const notification = document.createElement('div');
+      notification.className = `fixed top-20 right-4 px-6 py-3 rounded-lg text-white z-50 shadow-lg ${
+        type === 'success' ? 'bg-green-500' : 'bg-blue-500'
+      }`;
+      notification.innerHTML = `
+        <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-info-circle'} mr-2"></i>
+        ${message}
+      `;
+
+      document.body.appendChild(notification);
+
+      setTimeout(() => {
+        notification.style.opacity = '0';
+        notification.style.transition = 'opacity 0.3s ease';
+        setTimeout(() => notification.remove(), 300);
+      }, 2500);
+    }
+
+    // Initialize cart on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      initCart();
+      setActiveNavLink();
+    });
+
+    // ==================== Mobile Menu Toggle ====================
     const menuToggle = document.getElementById('menuToggle');
     const mobileMenu = document.getElementById('mobileMenu');
 
