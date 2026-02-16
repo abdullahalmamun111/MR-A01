@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SwiftCart - E-Commerce Application</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <style>
+    * {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .mobile-menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .mobile-menu.active {
+      max-height: 300px;
+    }
+  </style>
+</head>
+
+<body class="bg-white">
+
+  <!-- Navbar -->
+  <nav class="bg-gray-900 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center gap-3">
+          <button id="menuToggle" class="lg:hidden text-xl hover:text-indigo-400 focus:outline-none">
+            <i class="fas fa-bars"></i>
+          </button>
+          <span class="text-xl font-semibold text-indigo-500">SwiftCart</span>
+        </div>
+
+        <div class="hidden lg:flex items-center gap-8">
+          <a href="#" class="hover:text-indigo-400 transition">Home</a>
+          <a href="products.html" class="hover:text-indigo-400 transition">Products</a>
+          <a href="#" class="hover:text-indigo-400 transition">About</a>
+          <a href="#" class="hover:text-indigo-400 transition">Contact</a>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <i class="fas fa-shopping-cart cursor-pointer hover:text-indigo-400 transition"></i>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobileMenu" class="mobile-menu lg:hidden bg-gray-800 rounded-lg mb-2">
+        <div class="flex flex-col py-3">
+          <a href="/" class="px-4 py-3 hover:bg-gray-700 transition">Home</a>
+          <a href="products.html" class="hover:text-indigo-400 transition">Products</a>
+          <a href="#" class="px-4 py-3 hover:bg-gray-700 transition">About</a>
+          <a href="#" class="px-4 py-3 hover:bg-gray-700 transition">Contact</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="relative h-[450px] lg:h-[500px] bg-cover bg-center"
+    style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('banner-image.png');">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
+      <div class="text-white max-w-xl">
+        <h1 class="text-4xl lg:text-5xl font-bold mb-4">Best Collection For You</h1>
+        <p class="text-base lg:text-lg mb-6 text-gray-200">Discover the latest trends in fashion, electronics, and more.
+          Shop with confidence and style at SwiftCart.</p>
+        <button class="bg-indigo-600 hover:bg-indigo-700 px-8 py-3 rounded font-medium text-white transition">Shop
+          Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us Section -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-3">Why Choose Us</h2>
+        <p class="text-gray-600">We provide the best shopping experience with top-notch services.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="bg-white p-6 rounded-lg text-center shadow-sm hover:shadow-md transition">
+          <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-truck text-indigo-600 text-2xl"></i>
+          </div>
+          <h3 class="font-semibold text-lg mb-2">Fast Delivery</h3>
+          <p class="text-gray-600 text-sm">Get your orders delivered to your doorstep quickly and efficiently.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg text-center shadow-sm hover:shadow-md transition">
+          <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-headset text-indigo-600 text-2xl"></i>
+          </div>
+          <h3 class="font-semibold text-lg mb-2">24/7 Support</h3>
+          <p class="text-gray-600 text-sm">Our support team is available around the clock to assist you.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg text-center shadow-sm hover:shadow-md transition">
+          <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-shield-alt text-indigo-600 text-2xl"></i>
+          </div>
+          <h3 class="font-semibold text-lg mb-2">Secure Payment</h3>
+          <p class="text-gray-600 text-sm">Experience safe and secure transactions with our encrypted payment systems.
+          </p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg text-center shadow-sm hover:shadow-md transition">
+          <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-sync-alt text-indigo-600 text-2xl"></i>
+          </div>
+          <h3 class="font-semibold text-lg mb-2">Easy Returns</h3>
+          <p class="text-gray-600 text-sm">Not satisfied? Return your products easily within 30 days.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trending Products Section -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-10">Trending Now</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Product Card 1 -->
+        <div class="bg-white border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition">
+          <div class="bg-gray-100 h-72 flex items-center justify-center">
+            <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400" alt="Backpack"
+              class="h-full w-full object-cover">
+          </div>
+          <div class="p-5">
+            <span class="bg-indigo-100 text-indigo-700 text-xs font-medium px-3 py-1 rounded-full">Men's Clothing</span>
+            <h3 class="font-semibold text-gray-900 mt-3 mb-2">Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops</h3>
+            <div class="flex items-center gap-1 mb-2">
+              <i class="fas fa-star text-yellow-400 text-sm"></i>
+              <span class="text-sm text-gray-600">3.8 (120)</span>
+            </div>
+            <p class="text-2xl font-bold text-gray-900 mb-4">$109.95</p>
+            <div class="flex gap-2">
+              <button
+                class="flex-1 border border-gray-300 py-2 rounded hover:bg-gray-50 text-sm font-medium transition">
+                <i class="fas fa-eye mr-1"></i> Details
+              </button>
+              <button
+                class="flex-1 bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 text-sm font-medium transition">
+                <i class="fas fa-shopping-cart mr-1"></i> Add
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Card 2 -->
+        <div class="bg-white border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition">
+          <div class="bg-gray-100 h-72 flex items-center justify-center">
+            <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400" alt="T-Shirt"
+              class="h-full w-full object-cover">
+          </div>
+          <div class="p-5">
+            <span class="bg-indigo-100 text-indigo-700 text-xs font-medium px-3 py-1 rounded-full">Men's Clothing</span>
+            <h3 class="font-semibold text-gray-900 mt-3 mb-2">Mens Casual Premium Slim Fit T-Shirts</h3>
+            <div class="flex items-center gap-1 mb-2">
+              <i class="fas fa-star text-yellow-400 text-sm"></i>
+              <span class="text-sm text-gray-600">4.1 (259)</span>
+            </div>
+            <p class="text-2xl font-bold text-gray-900 mb-4">$22.3</p>
+            <div class="flex gap-2">
+              <button
+                class="flex-1 border border-gray-300 py-2 rounded hover:bg-gray-50 text-sm font-medium transition">
+                <i class="fas fa-eye mr-1"></i> Details
+              </button>
+              <button
+                class="flex-1 bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 text-sm font-medium transition">
+                <i class="fas fa-shopping-cart mr-1"></i> Add
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Card 3 -->
+        <div class="bg-white border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition">
+          <div class="bg-gray-100 h-72 flex items-center justify-center">
+            <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400" alt="Jacket"
+              class="h-full w-full object-cover">
+          </div>
+          <div class="p-5">
+            <span class="bg-indigo-100 text-indigo-700 text-xs font-medium px-3 py-1 rounded-full">Men's Clothing</span>
+            <h3 class="font-semibold text-gray-900 mt-3 mb-2">Mens Cotton Jacket</h3>
+            <div class="flex items-center gap-1 mb-2">
+              <i class="fas fa-star text-yellow-400 text-sm"></i>
+              <span class="text-sm text-gray-600">4.7 (500)</span>
+            </div>
+            <p class="text-2xl font-bold text-gray-900 mb-4">$55.99</p>
+            <div class="flex gap-2">
+              <button
+                class="flex-1 border border-gray-300 py-2 rounded hover:bg-gray-50 text-sm font-medium transition">
+                <i class="fas fa-eye mr-1"></i> Details
+              </button>
+              <button
+                class="flex-1 bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 text-sm font-medium transition">
+                <i class="fas fa-shopping-cart mr-1"></i> Add
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-300 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+
+        <!-- Company Info -->
+        <div>
+          <h3 class="text-white text-xl font-semibold mb-4">SwiftCart</h3>
+          <p class="text-sm">Your one-stop shop for all your fashion and lifestyle needs. Quality products, fast
+            delivery, and excellent support.</p>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="text-white font-semibold mb-4">QUICK LINKS</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="hover:text-white transition">Home</a></li>
+            <li><a href="#" class="hover:text-white transition">Products</a></li>
+            <li><a href="#" class="hover:text-white transition">About</a></li>
+            <li><a href="#" class="hover:text-white transition">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Support -->
+        <div>
+          <h4 class="text-white font-semibold mb-4">SUPPORT</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="hover:text-white transition">FAQ</a></li>
+            <li><a href="#" class="hover:text-white transition">Shipping</a></li>
+            <li><a href="#" class="hover:text-white transition">Returns</a></li>
+            <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+          </ul>
+        </div>
+
+        <!-- Newsletter -->
+        <div>
+          <h4 class="text-white font-semibold mb-4">SUBSCRIBE TO OUR NEWSLETTER</h4>
+          <p class="text-sm mb-4">The latest news, articles, and resources sent to your inbox weekly.</p>
+          <div class="flex gap-2">
+            <input type="email" placeholder="Enter your email"
+              class="flex-1 px-4 py-2 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:border-indigo-500 text-sm">
+            <button
+              class="bg-indigo-600 hover:bg-indigo-700 px-6 py-2 rounded text-sm font-medium text-white transition">Subscribe</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Social Links & Copyright -->
+      <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-sm">© 2025 SwiftCart, Inc. All rights reserved.</p>
+        <div class="flex gap-4 text-lg">
+          <a href="#" class="hover:text-white transition"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="hover:text-white transition"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="hover:text-white transition"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="hover:text-white transition"><i class="fab fa-linkedin"></i></a>
+          <a href="#" class="hover:text-white transition"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript for Mobile Menu Toggle -->
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    menuToggle.addEventListener('click', function () {
+      mobileMenu.classList.toggle('active');
+    });
+  </script>
+
+</body>
+
+</html>
