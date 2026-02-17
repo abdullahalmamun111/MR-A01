@@ -197,6 +197,8 @@ function createProductCard(product) {
   return card;
 }
 
+// generate random star
+
 function generateStars(rating) {
   const fullStars = Math.floor(rating);
   const hasHalfStar = rating % 1 >= 0.5;
@@ -223,6 +225,9 @@ function truncateText(text, maxLength) {
   if (text.length <= maxLength) return text;
   return text.substring(0, maxLength) + '...';
 }
+
+
+// modal functionality
 
 async function openProductModal(productId) {
   try {
